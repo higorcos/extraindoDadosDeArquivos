@@ -1,12 +1,28 @@
 'use client'
 import React, { FormEvent, useState, useEffect } from 'react'
-import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
+import { AlertError, AlertWarning } from '@/ultils/alert';
 
+interface selectReturn {
+  columnNome: string,
+  columnVinculo: string,
+  columnMes_Periodo: string,
+  columnAno: string,
+  columnOrgao: string,
+  columnCpf: string,
+  columnMatricula: string,
+  columnCargo: string,
+  columnDataAdmissao: string,
+  columnCargaHoraria: string,
+  columnValorBruto: string,
+  columnValorLiquido: string,
+  columnValorDesconto: string,
+}
 
+export default function PageInsertScreen2(props:any) {
+    const {setValueParent} = props
 
-export default function Page() {
     const [file, setFile] = useState<File | null>(null);
     const [returnInput, setReturnInput] = useState({});
 
@@ -28,18 +44,28 @@ export default function Page() {
     async function onSubmit(event:  React.MouseEvent<HTMLButtonElement>) {
       event.preventDefault()
       console.log(returnInput)
-      
+      if (Object.keys(returnInput).length < objParams.length){
+        return AlertWarning(`Selecione todas as colunas`)
+      }
+      setValueParent(returnInput)
     }
-  
+
+   
     const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement> ) => {
-      //const value = event.target.value;
-      console.log( `${event.currentTarget.name} ${event.currentTarget.value}`)
-      setReturnInput({
-        ...returnInput,
-        [event.currentTarget.name]: `${event.currentTarget.value}`,
-      });
+      const value = event.currentTarget.value;
+      const name = event.currentTarget.name;
+      console.log( `${name} ${value}`)
+      if(value != undefined && name != undefined){
+        setReturnInput({
+          ...returnInput,
+          [name]: `${value}`,
+        });
+      }
     };
     
+    const a =()=>{
+      console.log('iii')
+    }
 
   return (
     <div className="w-3/5 bg-fundo-n1 p-5 rounded-lg shadow-md  text-cor-primaria">
@@ -74,7 +100,13 @@ export default function Page() {
 
     <div className="flex justify-between">
         <button  onClick={()=>location.reload()} className="px-5 py-2 bg-botao-padrao text-white rounded-md cursor-pointer hover:bg-botao-padrao hover:opacity-50">CANCELAR</button>
-        <button onClick={(e)=>onSubmit(e)} className="px-5 py-2 bg-botao-padrao text-white rounded-md cursor-pointer hover:bg-botao-padrao hover:opacity-50">AVANÇAR</button>
+        
+
+        <button onClick={(e)=>onSubmit(e)} 
+        className={`px-5 py-2 bg-botao-padrao text-white rounded-md cursor-pointer hover:bg-botao-padrao hover:opacity-50  ${Object.keys(returnInput).length < objParams.length ? 'opacity-20' : false}`}
+        
+        >AVANÇAR</button>
+        
     </div>
 </div>
 

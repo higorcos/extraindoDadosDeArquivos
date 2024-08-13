@@ -1,12 +1,12 @@
 'use client'
-import React, { FormEvent, useState, useEffect } from 'react'
-import { toast, ToastContainer } from 'react-toastify';
+import React, {useState } from 'react'
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios'
+import { AlertError, AlertSuccess } from '@/ultils/alert';
 
 
+export default function PageInsertScreen1(props:any) {
+  const {setValueParent} = props
 
-export default function Page() {
     const [file, setFile] = useState<File | null>(null);
     const [namefile, setNameFile] = useState<string | null>(null);
     
@@ -18,16 +18,10 @@ export default function Page() {
           // Verificação pelo tipo MIME
           if (validExtensions.includes(fileTemp.type)) {
             setFile(fileTemp);
-            toast.success("Arquivo adicionado", {
-              position: "top-right"
-            });
+            AlertSuccess("Arquivo adicionado")
          } else {
           setFile(null);
-          
-            toast.error("Arquivo inválido, Formato não é aceito!", {
-              position: "top-right"
-            });
-           // Você pode adicionar uma mensagem de erro ao usuário aqui, se necessário
+            AlertError(`Arquivo inválido, Formato não é aceito!`)
          }
        }
     };  
@@ -75,7 +69,7 @@ export default function Page() {
         
       }
     </label>
-    <button onClick={()=>{}} className="px-5 py-2 bg-botao-padrao text-white rounded-md cursor-pointer absolute right-5 bottom-5 hover:bg-botao-padrao hover:opacity-50">AVANÇAR</button>
+    <button onClick={()=>{setValueParent(file)}} className="px-5 py-2 bg-botao-padrao text-white rounded-md cursor-pointer absolute right-5 bottom-5 hover:bg-botao-padrao hover:opacity-50">AVANÇAR</button>
     
     </div>
   );
