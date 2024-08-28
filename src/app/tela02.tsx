@@ -12,13 +12,31 @@ interface Props{
   setValueParent: (value: TypeColumunsDataInsert) => void; 
 }
 
-export default function PageInsertScreen2(props:Props) {
-const {dataFile, setValueParent,typeTCE} = props
 
+export default function PageInsertScreen2(props:Props) {
+const defaultValueInputTCE_MA: TypeColumunsDataInsert={
+  columnNome: '4',
+  columnVinculo: '8',
+  columnMes_Periodo: '1',
+  columnAno: '2',
+  columnOrgao: '0',
+  columnCpf: '5',
+  columnMatricula: '0',
+  columnCargo: '8',
+  columnDataAdmissao: '10',
+  columnCargaHoraria: '13',
+  columnValorBruto: '15',
+  columnValorLiquido: '16',
+  columnValorDesconto: '17',}
+const defaultCollumnsTableTCE_MA=["Órgão", "Mês(Período)", "Ano", "", "Nome", "CPF", "", "", "Vínculo", "", "Data Admissão", "", "", "Carga Horária",'', "Valor Bruto", "Valor Líquido", "Valor Desconto","","Tipo de Órgão", ""]
+const {dataFile, setValueParent,typeTCE} = props
 const [file, setFile] = useState(dataFile);
 const [rows, setRows] = useState<(string | number)[][]>([]);
 const [numColumns,setNumColumns] = useState<number>()
-
+const heightTable= {
+  "MA": 500,
+  "PI": 300
+}
 const [returnInput, setReturnInput] = useState<TypeColumunsDataInsert>({columnNome: '',
   columnVinculo: '',
   columnMes_Periodo: '',
@@ -55,13 +73,13 @@ useEffect(() => {
         const arrayBuffer = await dataFile.arrayBuffer();
         
         // Ler o arquivo com o formato correto
-        const workbook = read(arrayBuffer, { type: "array" });
+        const workbook = read(arrayBuffer, { type: "array", cellText: true,cellDates:true });
 
         // Obter a primeira planilha
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         
         // Converter para JSON
-        const raw_data: (string | number)[][] = utils.sheet_to_json(worksheet, { header: 1 });
+        const raw_data: (string | number)[][] = utils.sheet_to_json(worksheet, { header: 1, raw:false, dateNF:"MM/DD/YYYY" });
         
         // Definir os dados da planilha
         setRows(raw_data);
@@ -79,6 +97,10 @@ useEffect(() => {
 
 async function onSubmit(event:  React.MouseEvent<HTMLButtonElement>) {
   event.preventDefault()
+    if(typeTCE == "MA"){
+      setValueParent(defaultValueInputTCE_MA)
+      return
+    }
   
     if (checkIfAreAllFieldsDefined(returnInput)){
         setValueParent(returnInput)
@@ -117,6 +139,7 @@ const tableInnerStyle: CSSProperties = {
   minWidth: '50px', // Define uma largura mínima para ativar a rolagem horizontal
   borderCollapse: 'collapse', // Opcional: remove espaços entre células da tabela
 };
+console.log(dataFile)
 
 return (
   <div className="w-3/5 bg-fundo-n1 p-5 rounded-lg shadow-md  text-cor-primaria">
@@ -126,28 +149,31 @@ return (
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria mx-2 relative"></div>
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 "></div>
   </div>
-
-  <form className="mb-8" method='POST'>
-      <p className="text-xl mb-4 font-[600]">Selecione em qual coluna os dados se encontram:</p>
-      <div className="grid grid-cols-6 gap-4">
-          {objParams.map((item, i) => (
-              <div key={i}>
-                  <label className="block text-cor-primaria mb-2">{item.nameInput}:</label>
-                  <select className="w-full p-2 border border-gray-300 rounded" name={item.nameParam}  onChange={(e)=>handleChangeSelect(e)}>
-                      <option value="" disabled selected>Selecione</option>
-                      {Array(numColumns).fill('').map((item, j) => (
-                          <option key={j} value={j} >Coluna {j+1}</option>
-                      ))}
-                  </select>
-              </div>
-          ))}
-      </div>
-  </form>
+    {typeTCE == "PI" ? <>
+        <form className="mb-8" method='POST'>
+            <p className="text-xl mb-4 font-[600]">Selecione em qual coluna os dados se encontram:</p>
+            <div className="grid grid-cols-6 gap-4">
+              
+                {objParams.map((item, i) => (
+                    <div key={i}>
+                        <label className="block text-cor-primaria mb-2">{item.nameInput}:</label>
+                        <select className="w-full p-2 border border-gray-300 rounded" name={item.nameParam}  onChange={(e)=>handleChangeSelect(e)}>
+                            <option value="" disabled selected>Selecione</option>
+                            {Array(numColumns).fill('').map((item, j) => (
+                                <option key={j} value={j} >Coluna {j+1}</option>
+                            ))}
+                        </select>
+                    </div>
+                ))}
+            </div>
+        </form>
+    </> :  <p className="text-xl mb-4 font-[600]">Modelo TCE-MA:</p>}
+    
 
   <div className="mb-8">
       <p className="text-xl mb-4  font-[600]">Visualização:</p>
       <div 
-      className="w-full h-[300px] border-2 border-dotted border-cor-primaria bg-fundo-n2 rounded-lg pb-10"
+      className={`w-full h-[600px] border-2 border-dotted border-cor-primaria bg-fundo-n2 rounded-lg pb-10`}
       style={tableStyle}
       >
         <table style={tableInnerStyle}
@@ -155,11 +181,21 @@ return (
           <thead className="text-xs text-gray-700 uppercase bg-cor-primaria dark:bg-gray-700 dark:text-gray-400">
             <tr
             className="bg-cor-primaria border-b dark:bg-gray-800 dark:border-gray-700">
+
+              {typeTCE == "MA" ? <>
+                {defaultCollumnsTableTCE_MA?.map((index) => (
+                  <th 
+                  scope="col" className="px-6 py-3"
+                  key={index}>{index}</th>
+                ))}
+              </> : <>              
               {rows[0]?.map((header, index) => (
-                <th 
-                scope="col" className="px-6 py-3"
-                key={index}>{index+1}</th>
-              ))}
+                  <th 
+                  scope="col" className="px-6 py-3"
+                  key={index}>{index}</th>
+                ))}
+              </>
+              }
             </tr>
           </thead>
           <tbody>
