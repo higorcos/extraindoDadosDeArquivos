@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
 
 
-export default function PageInsertScreen1(props:any) {
+export default function InsertFile(props:any) {
 const {setValueParent} = props
 
 const [file, setFile] = useState<File | null>(null);

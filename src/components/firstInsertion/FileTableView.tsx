@@ -13,7 +13,7 @@ interface Props{
 }
 
 
-export default function PageInsertScreen2(props:Props) {
+export default function InsertReferences(props:Props) {
 const defaultValueInputTCE_MA: TypeColumunsDataInsert={
   columnNome: '4',
   columnVinculo: '8',

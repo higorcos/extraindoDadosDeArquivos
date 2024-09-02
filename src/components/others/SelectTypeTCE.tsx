@@ -5,7 +5,7 @@ import { AlertError, AlertSuccess } from '@/ultils/alert';
 import Image from 'next/image';
 
 
-export default function PageInsertScreen1(props:any) {
+export default function SelectTypeTCE(props:any) {
   const {clickTCE_MA, clickTCE_PI} = props
 
     const [file, setFile] = useState<File | null>(null);
