@@ -173,7 +173,7 @@ return (
   <div className="mb-8">
       <p className="text-xl mb-4  font-[600]">Visualização:</p>
       <div 
-      className={`w-full h-[600px] border-2 border-dotted border-cor-primaria bg-fundo-n2 rounded-lg pb-10`}
+      className={`w-full h-[400px] border-2 border-dotted border-cor-primaria bg-fundo-n2 rounded-lg pb-10`}
       style={tableStyle}
       >
         <table style={tableInnerStyle}
@@ -192,7 +192,7 @@ return (
               {rows[0]?.map((header, index) => (
                   <th 
                   scope="col" className="px-6 py-3"
-                  key={index}>{index}</th>
+                  key={index}>{index + 1}</th>
                 ))}
               </>
               }

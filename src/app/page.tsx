@@ -21,9 +21,6 @@ const [returnInput, setReturnInput] = useState<TypeColumunsDataInsert | null>(nu
 const [startType_TCE_MA, setStartType_TCE_MA] = useState<boolean>(false);
 
 
-
-
-
 const valueFile = (value:any) => {
   setFile(value)
   setStatus1(false)
