@@ -3,8 +3,8 @@ import React, { FormEvent, useState, useEffect } from 'react'
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
-import PageInsertScreen2 from './tela02';
-import PageInsertScreen1 from './tela01';
+import PageInsertScreen2 from '../components/firstInsertion/FileTableView';
+import PageInsertScreen1 from '../components/firstInsertion/LayoutInsertFile';
 import SelectTypeFormt from './selecaoTipo';
 
 import {TypeColumunsDataInsert} from './intefaces/TypeColumunsDataInsert'  
@@ -14,8 +14,8 @@ import {TypeColumunsDataInsert} from './intefaces/TypeColumunsDataInsert'
 export default function Page() {
 const [file, setFile] = useState<File | null>(null);
 const [renderSelectType, setRenderSelectType] = useState<boolean>(true);
-const [status2, setStatus2] = useState<boolean>(false);
-const [status1, setStatus1] = useState<boolean>(false);
+const [showFileReferencesLayout, setShowFileReferencesLayout] = useState<boolean>(false);
+const [showInsertLayout, setShowInsertLayout] = useState<boolean>(false);
 const [returnInput, setReturnInput] = useState<TypeColumunsDataInsert | null>(null);
 
 const [startType_TCE_MA, setStartType_TCE_MA] = useState<boolean>(false);
@@ -23,8 +23,8 @@ const [startType_TCE_MA, setStartType_TCE_MA] = useState<boolean>(false);
 
 const valueFile = (value:any) => {
   setFile(value)
-  setStatus1(false)
-  setStatus2(true)
+  setShowInsertLayout(false)
+  setShowFileReferencesLayout(true)
   
 };
 const valuesSelect = (value:TypeColumunsDataInsert) => {
@@ -32,7 +32,7 @@ const valuesSelect = (value:TypeColumunsDataInsert) => {
 
   console.log(returnInput)
   onSubmit()
-  //setStatus2(false)
+  //setShowFileReferencesLayout(false)
   
 };
 
@@ -40,13 +40,13 @@ const fClickTCE_MA = () =>{
   console.log('Click_TCE_MA');
   setStartType_TCE_MA(true)
   setRenderSelectType(false)
-  setStatus1(true)
+  setShowInsertLayout(true)
 }
 const fClickTCE_PI = () =>{
   console.log('Click_TCE_PI');
   setStartType_TCE_MA(false)
   setRenderSelectType(false)
-  setStatus1(true)
+  setShowInsertLayout(true)
 }
 
 async function onSubmit() {
@@ -93,11 +93,11 @@ async function onSubmit() {
 return (
     <>
     {renderSelectType && <SelectTypeFormt clickTCE_MA={fClickTCE_MA} clickTCE_PI={fClickTCE_PI}/>}
-    {status1 && <PageInsertScreen1 setValueParent={valueFile}/>}
+    {showInsertLayout && <PageInsertScreen1 setValueParent={valueFile}/>}
 
 
       {file != null && <>
-        {status2 && <>
+        {showFileReferencesLayout && <>
           {startType_TCE_MA ? 
             <><PageInsertScreen2 typeTCE={"MA"} setValueParent={valuesSelect} dataFile={file} /></> : 
             <><PageInsertScreen2 typeTCE={"PI"} setValueParent={valuesSelect} dataFile={file} /></>}

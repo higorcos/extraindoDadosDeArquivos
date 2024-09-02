@@ -4,7 +4,7 @@ import { read, utils } from 'xlsx';
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import { AlertError, AlertWarning } from '@/ultils/alert';
-import {TypeColumunsDataInsert} from './intefaces/TypeColumunsDataInsert'  
+import {TypeColumunsDataInsert} from '../../app/intefaces/TypeColumunsDataInsert'  
 
 interface Props{
   dataFile: File;
