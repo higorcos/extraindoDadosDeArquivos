@@ -1,5 +1,5 @@
 'use client'
-import React ,{ createContext, useState, useEffect} from "react";
+import React ,{ createContext, useState, useEffect,ReactNode} from "react";
 // import { PortalContext } from "../contexts/portal";
 import api from "../services/api";
 import { redirect } from 'next/navigation'
@@ -13,7 +13,7 @@ interface AuthContextProps {
   }
 export const AuthContext = createContext<AuthContextProps|undefined>(undefined);
 
-export const AuthProvider =({children}: { children: React.ReactNode })=> {
+export const AuthProvider =({children}: { children: ReactNode })=> {
 
     const [statusUser, setStatusUser] = useState<boolean>(false)
     const [user,setUser] = useState<string | null>(null)
@@ -23,7 +23,7 @@ export const AuthProvider =({children}: { children: React.ReactNode })=> {
     useEffect(()=>{
         const recoveryUser:string|null = localStorage.getItem('userWk')
         const recoveryToken = localStorage.getItem('tokenUserWkGerenciador')
-        console.log('99')
+        
         if(recoveryUser && recoveryToken){
             setUser(recoveryUser)
             api.defaults.headers['x-access-token'] =  recoveryToken

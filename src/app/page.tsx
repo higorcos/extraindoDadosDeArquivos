@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SelectTypeFormt from '../components/others/SelectTypeTCE';
 import InsertFile from '../components/firstInsertion/LayoutInsertFile';
 import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
-import {TypeColumunsDataInsert} from './intefaces/TypeColumunsDataInsert'  
+import {TypeColumunsDataInsert} from '../intefaces/TypeColumunsDataInsertInterface'  
 import InsertReferences from '../components/firstInsertion/FileTableView';
 
 
