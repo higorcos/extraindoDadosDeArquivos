@@ -1,4 +1,7 @@
 import axios from 'axios'
+import TableSheetsPrimary from "@/components/table/public/TableSheetsPrimary"
+//import React, { FormEvent, CSSProperties } from 'react'
+
 interface Props {
   error: boolean,
 	title: string,
@@ -43,16 +46,9 @@ export default async function Page() {
    
   }
 
-
-
   return ( 
-    <ul>
-     
-    
-      {inforFolhas.map((post:DataFolha) => (
-        <li key={post.NOME}>{post.NOME}</li>
-      ))} 
-      
-    </ul>
+    <>
+    <TableSheetsPrimary data={inforFolhas}/>
+  </>
   )
 }
