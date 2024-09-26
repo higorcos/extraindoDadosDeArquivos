@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import SelectPortal from '../../components/selectPortal/SelectPortal' 
+//import SelectPortal from '../../components/selectPortal/SelectPortal' 
 
 
 export default function Page(){
@@ -14,6 +14,6 @@ export default function Page(){
 return(
 <>
     <h1>TTTT</h1>
-    {showBoxOfSelectPortal&&<SelectPortal activeBox={clickSelectPortal} />}
+    {/* {showBoxOfSelectPortal&&<SelectPortal activeBox={clickSelectPortal} />} */}
 </>
 )}

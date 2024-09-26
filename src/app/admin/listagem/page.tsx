@@ -49,9 +49,7 @@ export default function PageListagemFolhasAdm() {
          <div className="w-3/5 bg-fundo-n1 p-5 rounded-lg shadow-md  text-cor-primaria">
       
       <div className="flex justify-center items-center mb-10">
-          <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 "></div>
-          <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 "></div>
-          <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria mx-2 "></div>
+         
       </div>
   
       

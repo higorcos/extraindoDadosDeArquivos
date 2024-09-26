@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import SelectPortal from '@/components/selectPortal/SelectPortal1' 
+/* import SelectPortal from '@/components/selectPortal/SelectPortal1'  */
 import { PortalContext } from '@/context/PortalContext';
 
 
@@ -20,6 +20,6 @@ return(
 <br/>
 <br/>
 <br/>
-    {showBoxOfSelectPortal&&<SelectPortal activeBox={clickSelectPortal} />} 
+    {/* {showBoxOfSelectPortal&&<SelectPortal activeBox={clickSelectPortal} />}  */}
 </>
 )}

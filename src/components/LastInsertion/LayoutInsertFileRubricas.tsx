@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
 
 
-export default function InsertFile(props:any) {
+export default function InsertFileRubricas(props:any) {
 const {setValueParent} = props
 
 const [file, setFile] = useState<File | null>(null);
@@ -38,8 +38,8 @@ return (
   <div className="w-3/5 bg-fundo-n1 p-5 rounded-lg shadow-md relative">
   <div className="flex justify-center items-center mb-10">
       <div className="bg-black"></div>
-      <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria mx-2 relative"></div>
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 relative"></div>
+      <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria mx-2 relative"></div>
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 relative"></div>
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 relative"></div>
   </div>
@@ -62,7 +62,7 @@ return (
       <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
       </svg>
     </div>
-      <p className="text-cor-primaria text-center text-base">Adicione o arquivo com os dados da folha (Servidores).<br/> São aceitos no formato csv</p>
+      <p className="text-cor-primaria text-center text-base">Adicione o arquivo de RUBRICAS.<br/> Formato csv é aceito</p>
       </> : <>
       <div className="upload-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-file-earmark-check w-[50px] h-[50px] mb-5 fill-cor-primaria botao-padrao"  viewBox="0 0 16 16">

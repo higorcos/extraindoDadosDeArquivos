@@ -1,0 +1,234 @@
+/* :global(:root) {
+  --cor-nome-portal: #000080;
+}
+ */
+.section-title-portarias {
+  padding: 20px 0 20px 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.search {
+    display: flex;
+}
+.iconeDownload{
+  margin-top: 7px;
+  width: 30px;
+}
+.imgSearchPortarias{
+    display: flex;
+    border: 2px solid #000080; /* var(--cor-nome-portal); */
+    border-radius: 0px 15px 15px 0px;
+    border-left: none;
+    position: relative;
+    right: -228px;
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+}
+svg.iconeBuscarPortarias {
+  fill: #000080; /* var(--cor-icone-buscar-atos-administrativos); */
+}
+svg.iconeDownload{
+  fill: #000080;/* var(--cor-icone-buscar-atos-administrativos); */
+
+}
+.iconeDownload:hover{
+  transition: 1.5s;
+  scale: 1.2;
+}
+.iconeBuscarPortarias {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.fromPortarias{
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  width: 15rem;
+  height: 4rem;
+
+}
+input[type="text" i].formInput{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 100%;
+    font-size: 1.2rem; 
+    border: 2px solid #000080; /* var(--cor-nome-portal ); */
+    border-radius: 15px 0px 0px 15px;
+    font-family: inherit;
+    font-size: inherit;
+    color: rgb(0, 0, 0);
+    outline: none;
+    padding: 1.25rem;
+    background: none;
+    border-right: none;
+}
+ label.formLabelPortarias{
+    font-size: 1.1rem !important; 
+    position: absolute ;
+    top: -0.7rem !important;
+   left: 0.8rem !important;  
+   
+    padding: 0 0.5rem;
+    color: #000080;/*  var(--cor-nome-portal ); */
+    cursor: text;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+    background-color: #ffff;
+  }
+
+
+
+.boxDownload{
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #000080; /* var(--cor-nome-portal ); */
+    border-radius: 15px;
+    font-family: inherit;
+    font-size: inherit;
+    color:#000080; /* var(--cor-nome-portal ); */
+    outline: none;
+    padding: 1.25rem;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+section.box{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+section.tableShowPortarias {
+  max-width: 1201px;
+  margin: 0 auto;
+}
+.resultTableFooter {
+  height: 7rem;
+}
+
+
+
+/* mudança boostrap */
+.tableShowPortarias .table>:not(caption)>*>* {
+  text-align: center;
+}
+.tdTable {
+  padding: 22px !important;
+}
+td.title-color-ffff-table {
+  padding: 41px 22px !important;
+}
+td.thTitlePortais.tdTable {
+  text-align: justify;
+  text-transform: uppercase;
+}
+td.thTitlePortais.tdTable a:hover {
+  color: #0a58ca;
+  color: black;
+  scale: 1.1;
+}
+
+
+
+
+@media screen and (max-width: 670px) {  
+/* 
+h6.section-title rotes_pages {
+  
+} */
+
+h6.section-title{
+  font-size: 0.8rem;
+}
+}
+@media screen and (max-width: 540px) {  
+  .fromPortarias {
+    width: 10rem;
+    height: 3.2rem;
+}
+  .imgSearchPortarias {
+    right: -136px;
+}
+.iconeDownload {
+  height: 26px;
+  margin-top: 8px;
+
+}
+
+.tdTable {
+  padding: 6px !important;
+}
+td.thTitlePortais.tdTable {
+  font-size: 0.9em;
+}
+td.acoesCollumPortais.tdTable {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+img.iconeDownload.list-portarias {
+  width: 20px;
+}
+
+
+}  
+
+/* .section-title-portarias {
+  padding: 38px 0 20px 0;
+  margin: 0 auto;
+  text-align: center;
+  width: 527px;
+} */
+
+
+/* 
+ Tabela Sacop list info
+*/
+.TableSacopInfor>:not(:first-child) {
+  border-top: 1px solid currentColor;
+}
+table.TableSacopInfor {
+  border-color: var(--cor-sub-lista-navbar);
+}
+
+.TableSacopInfor>thead {
+  vertical-align: middle;
+}
+
+/*Paginação*/
+
+.page-item.active .page-link {
+  background-color: var(--cor-sub-lista-navbar) !important;
+  border-color: #dee2e6 !important;
+}
+li a.page-link span  {
+  color: var(--cor-sub-lista-navbar) !important;
+}
+.page-link:focus {
+   box-shadow: 0 0 0 0.25rem var(--cor-sub-lista-navbar) !important;
+}
+/*footer paginação table */
+section.footerPaginationTable{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        color: var(--diary-table-txt);
+        font-weight: 500;
+}
+.tableShowPortarias.tableFilesSacop .table>:not(caption)>*>* {
+  text-align: initial;
+}
+table#filesSacop {
+  text-transform: uppercase;
+}

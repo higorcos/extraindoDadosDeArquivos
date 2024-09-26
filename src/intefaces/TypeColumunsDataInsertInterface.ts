@@ -1,6 +1,6 @@
 export interface TypeColumunsDataInsert  {
         columnNome: string,
-        columnVinculo: string,
+        //columnVinculo: string, //não configurada tbm 
         columnMes_Periodo: string,
         columnAno: string,
         columnOrgao: string,
@@ -11,5 +11,9 @@ export interface TypeColumunsDataInsert  {
         columnCargaHoraria: string,
         columnValorBruto: string,
         columnValorLiquido: string,
-        columnValorDesconto: string,
+        //columnValorDesconto: string, //não está sendo usada
+        columnCBO: string,
+        columnIdTipoPagamento: string,
+        columnLotacao: string,
+
 }

@@ -4,35 +4,27 @@ import { read, utils } from 'xlsx';
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import { AlertError, AlertWarning } from '@/ultils/alert';
-import {TypeColumunsDataInsert} from '../../intefaces/TypeColumunsDataInsertInterface'  
+import {TypeColumunsDataInsertRubricas} from '../../intefaces/TypeColumunsDataInsertInterfaceRubricas'  
 
 interface Props{
   dataFile: File;
   typeTCE: 'MA'|'PI';
-  setValueParent: (value: TypeColumunsDataInsert) => void; 
+  setValueParent: (value: TypeColumunsDataInsertRubricas) => void; 
 }
 
 
-export default function InsertReferences(props:Props) {
-const defaultValueInputTCE_MA: TypeColumunsDataInsert={
-  columnNome: '4',
-  //columnVinculo: '8',
+export default function InsertReferencesRubricas(props:Props) {
+const defaultValueInputTCE_MA: TypeColumunsDataInsertRubricas={
+  columnOrgao: '0',
   columnMes_Periodo: '1',
   columnAno: '2',
-  columnOrgao: '0',
-  columnCpf: '5',
-  columnMatricula: '0',
-  columnCargo: '8',
-  columnDataAdmissao: '10',
-  columnCargaHoraria: '13',
-  columnValorBruto: '15',
-  columnValorLiquido: '16',
-  //columnValorDesconto: '17',
-  columnLotacao: '19',
-  columnIdTipoPagamento:'3',
-  columnCBO:'17'
+  columnIdTipoPagamento: '3',
+  columnCpf: '4',
+  columnTipoPagamento: '7',
+  columnValor: '8',
+  columnDesconto: '14',
 }
-const defaultCollumnsTableTCE_MA=["Órgão", "Mês(Período)", "Ano", "ID Tipo pagamento", "Nome", "CPF", "", "", "Lotação", "", "Data Admissão", "", "", "Carga Horária",'', "Valor Bruto", "Valor Líquido", "Valor Desconto","","Tipo de Órgão", ""]
+const defaultCollumnsTableTCE_MA=["Órgão", "Mês(Período)", "Ano", "ID Tipo pagamento", "CPF", "", "", "Tipo Pagamento", "Valor", "", "", "", "", "",'Desconto']
 const {dataFile, setValueParent,typeTCE} = props
 const [file, setFile] = useState(dataFile);
 const [rows, setRows] = useState<(string | number)[][]>([]);
@@ -41,41 +33,27 @@ const heightTable= {
   "MA": 500,
   "PI": 300
 }
-const [returnInput, setReturnInput] = useState<TypeColumunsDataInsert>({columnNome: '',
-  //columnVinculo: '',
+const [returnInput, setReturnInput] = useState<TypeColumunsDataInsertRubricas>({
+  columnCpf: '',
   columnMes_Periodo: '',
   columnAno: '',
   columnOrgao: '',
-  columnCpf: '',
-  columnMatricula: '',
-  columnCargo: '',
-  columnDataAdmissao: '',
-  columnCargaHoraria: '',
-  columnValorBruto: '',
-  columnValorLiquido: '',
-  //columnValorDesconto: '',
-  columnLotacao: '',
-  columnIdTipoPagamento:'',
-  columnCBO:''
-});
+  columnTipoPagamento: '',
+  columnIdTipoPagamento: '',
+  columnDesconto: '',
+  columnValor: '',});
+
 const objParams = [
   { nameParam: 'columnOrgao', nameInput: 'CPF do Orgão' },
-  { nameParam: 'columnMes_Periodo', nameInput: 'Mês(Período)' },
+  { nameParam: 'columnMes_Periodo', nameInput: 'Mes Período' },
   { nameParam: 'columnAno', nameInput: 'Ano' },
-  { nameParam: 'columnIdTipoPagamento', nameInput: 'IdTipoPagamento' },
-  { nameParam: 'columnNome', nameInput: 'Nome' },
-  { nameParam: 'columnCpf', nameInput: 'CPF' },
-  { nameParam: 'columnCBO', nameInput: 'CBO' },
-  { nameParam: 'columnCargo', nameInput: 'Cargo' },
-  { nameParam: 'columnLotacao', nameInput: 'Lotação' },
-  { nameParam: 'columnMatricula', nameInput: 'Matrícula' },
-  { nameParam: 'columnDataAdmissao', nameInput: 'Data Admissão' },
-  { nameParam: 'columnCargaHoraria', nameInput: 'Carga Horária' },
-  { nameParam: 'columnValorBruto', nameInput: 'Valor Bruto' },
-  { nameParam: 'columnValorLiquido', nameInput: 'Valor Líquido' },
- // { nameParam: 'columnVinculo', nameInput: 'Vínculo' },
-  //{ nameParam: 'columnValorDesconto', nameInput: 'Valor Desconto' },
+  { nameParam: 'columnIdTipoPagamento', nameInput: 'Id Tipo Pagamento' },
+  { nameParam: 'columnCpf', nameInput: 'Cpf' },
+  { nameParam: 'columnTipoPagamento', nameInput: 'Tipo Pagamento' },
+  { nameParam: 'columnValor', nameInput: 'Valor' },
+  { nameParam: 'columnDesconto', nameInput: 'Desconto' },
 ]
+
     
 
 useEffect(() => {
@@ -121,7 +99,7 @@ async function onSubmit(event:  React.MouseEvent<HTMLButtonElement>) {
       }
 }
 
-const checkIfAreAllFieldsDefined = (obj: TypeColumunsDataInsert): boolean => {
+const checkIfAreAllFieldsDefined = (obj: TypeColumunsDataInsertRubricas): boolean => {
   if (returnInput){
     return Object.values(obj).every(value => value !== "");
   }else{
@@ -159,8 +137,8 @@ return (
   <div className="flex justify-center items-center mb-10">
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 "></div>
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 "></div>
-      <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria mx-2 relative"></div>
       <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria opacity-25 mx-2 "></div>
+      <div className="w-[15px] h-[15px] rounded-full bg-cor-primaria mx-2 relative"></div>
   </div>
     {typeTCE == "PI" ? <>
         <form className="mb-8" method='POST'>
@@ -180,11 +158,11 @@ return (
                 ))}
             </div>
         </form>
-    </> :  <p className="text-xl mb-4 font-[600]">Modelo TCE-MA:</p>}
+    </> :  <p className="text-xl mb-4 font-[600]">Modelo TCE-MA: </p>}
     
 
   <div className="mb-8">
-      <p className="text-xl mb-4  font-[600]">Visualização:</p>
+      <p className="text-xl mb-4  font-[600]">Visualização Da tabela de rubricas:</p>
       <div 
       className={`w-full h-[400px] border-2 border-dotted border-cor-primaria bg-fundo-n2 rounded-lg pb-10`}
       style={tableStyle}
