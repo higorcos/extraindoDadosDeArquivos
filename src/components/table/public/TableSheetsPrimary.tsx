@@ -2,56 +2,38 @@
 import { useEffect,useState} from "react";
 import { Table } from "react-bootstrap";
 import Pagination from 'react-bootstrap/Pagination';
-
-
 import styles from '@/components/table/Table.module.css'
+import {IdataFolha, IdataPeriods,IdataFolhasAgrupadas} from '@/intefaces/ShowSheetsDataInterface'
 import generateExportFile from "@/components/others/downloads/filesDownloads";
+ 
+import { useRouter } from 'next/navigation'
 
  
 interface Props {
-  data: DataFolha[],
+  sheets: IdataFolha[],
+  periods: IdataPeriods[],
+  sheetsGroup: IdataFolhasAgrupadas[]
+  uuidOrgao:string,
 }
-interface DataFolha{
-    ID: string;
-    NOME: string;
-    MES_PERIODO: string;
-    ANO: string;
-    TIPO_FOLHA: string;
-    ORGAO: string;
-    CPF: string;
-    MATRICULA: string;
-    CBO: string;
-    CARGO: string;
-    LOTACAO: string;
-    VINCULO: string | null;
-    DATAADMISSAO: string; 
-    CARGAHORARIA: string;
-    VALORBRUTO: number;
-    VALORLIQUIDO: number;
-    VALORDESCONTO: number;
-    VISUALIZACAO: number;
-}
-const negateKeys = ['ID','VISUALIZACAO']
+const negateKeys = ['ID','ORGAO','VISUALIZACAO']
 
 export default function TableSheetsPrimary(props:Props) {
-  const files = props.data;
-  const [inforSheets,setInforSheets] = useState<DataFolha[]>(files)
+  const router = useRouter()
+  const files = props.sheets;
+  console.log(props)
+  const [inforSheets,setInforSheets] = useState<IdataFolha[]>(files)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(10); // Número de itens por página
   
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = inforSheets.slice(indexOfFirstItem, indexOfLastItem);
-    
-  //filtro
-  const [filter, setFilter] = useState<string>('');
 
 
   const filtrarTabela = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valueFilter = e.target.value.toLowerCase();
-    setFilter(valueFilter);
 
-    const dadosFiltrados: DataFolha[] = files.filter((item) =>
+    const dadosFiltrados: IdataFolha[] = files.filter((item) =>
       item.NOME.toLowerCase().includes(valueFilter) ||
       item.MES_PERIODO.toLowerCase().includes(valueFilter) ||
       item.ANO.toLowerCase().includes(valueFilter) ||
@@ -71,10 +53,21 @@ export default function TableSheetsPrimary(props:Props) {
     );
     setInforSheets(dadosFiltrados);
   };
+
+  const handlePeriod = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    router.push(`/folhas/${props.uuidOrgao}/${event.target.value}`)
+  };
   
   return (
     <>
     <br/>
+      <label htmlFor="periodos">Período</label>
+      <select onChange={handlePeriod} id="periodos">
+      {props.periods.map((period:IdataPeriods,key:number)=>(
+        <option value={period.MES_PERIODO+"/"+period.ANO} key={key}>{period.MES_PERIODO+""+period.ANO}</option>
+      ))}
+  
+      </select>
 
 <section className={styles.box}>
     <div className={styles.search}>
@@ -149,7 +142,7 @@ export default function TableSheetsPrimary(props:Props) {
         </tr>
       </thead>
       <tbody>         
-        {currentItems?.map((data:DataFolha, index:number) => (
+        {currentItems?.map((data:IdataFolha, index:number) => (
           <tr key={index}>
             {/*  //Matrícula	CPF	Nome	Admissão	Cargo	Função	CBO	Lotação	Vínculo	Carga Horária	Folha	Ano	Período	Valor Bruto	Desconto	Líquido */}
             <td className={`${styles.thTitlePortais} ${styles.tdTable}`}>{index} @ {data.MATRICULA}</td>

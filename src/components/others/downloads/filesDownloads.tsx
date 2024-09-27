@@ -1,25 +1,26 @@
 import exportFromJSON from 'export-from-json'
+import {AllowedFileTypes} from '@/intefaces/ShowSheetsDataInterface'
 
-export default function generateExportFile(name:string,fileTypeForExport:string,data:any,negateKeys:string[]){
-    const dataExport = newObjectNegateDowland(data,negateKeys)
+export default function generateExportFile(fileName:string,fileTypeForExport:AllowedFileTypes,dice:any,negateKeys:string[]){
+    const data = newObjectNegateDowland(dice,negateKeys)
     
     
-    switch (fileTypeForExport.toLocaleLowerCase()) {
+    switch (fileTypeForExport) {
         case 'json':
             const exportType =  exportFromJSON.types.json
-            exportFromJSON({ data:dataExport, fileName:name, exportType:exportType })
+            exportFromJSON({ data, fileName, exportType:exportType })
             break;
         case 'csv':
             const exportCsv =  exportFromJSON.types.csv
-            exportFromJSON({ data:dataExport, fileName:name, exportType:exportCsv })
+            exportFromJSON({ data, fileName, exportType:exportCsv })
             break;
         case 'xml':
             const exportXml =  exportFromJSON.types.xml
-            exportFromJSON({ data:dataExport, fileName:name, exportType:exportXml })
+            exportFromJSON({ data, fileName, exportType:exportXml })
             break;
         case 'xls':
             const exportXls =  exportFromJSON.types.xls
-            exportFromJSON({ data:dataExport, fileName:name, exportType:exportXls })
+            exportFromJSON({ data, fileName, exportType:exportXls })
             break;
         default:
             throw new Error(`Tipo de arquivo não suportado: ${fileTypeForExport}`);
