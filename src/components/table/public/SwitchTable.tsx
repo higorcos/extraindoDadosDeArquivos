@@ -23,6 +23,7 @@ export default function SwitchTable(props:IpropsComponetShowData) {
 
   return (
       <>
+      
         <div onClick={()=>setOptionSwitchTable('0')}> Button 0 </div>
         <div onClick={()=>setOptionSwitchTable('1')}> Button 1 </div>
         <div onClick={()=>setOptionSwitchTable('2')}> Button 2 </div>

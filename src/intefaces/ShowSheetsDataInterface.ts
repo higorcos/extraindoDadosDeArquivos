@@ -43,6 +43,7 @@ export interface IdataFolhasAgrupadas{
 export interface IpropsComponetShowData {
   sheets: IdataFolha[],
   periods: IdataPeriods[],
+  inforPortal: IinforPortal,
   sheetsGroup: IdataFolhasAgrupadas[]
   uuidOrgao:string,
   idTable: OptionSwitchTable

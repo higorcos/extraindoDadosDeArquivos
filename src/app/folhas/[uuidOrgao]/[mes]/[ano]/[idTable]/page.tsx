@@ -49,6 +49,7 @@ export default async function Page({params}:{params:Params}) {
       sheets={inforFolhas.folhas} 
       periods={inforFolhas.periodos} 
       sheetsGroup={inforFolhas.folhasAgupadas} 
+      inforPortal={inforFolhas.inforPortal}
       uuidOrgao={uuidOrgao} 
       idTable={idTable}/>
   </>
