@@ -3,21 +3,15 @@ import { useEffect,useState} from "react";
 import { Table } from "react-bootstrap";
 import Pagination from 'react-bootstrap/Pagination';
 import styles from '@/components/table/Table.module.css'
-import {IdataFolha, IdataPeriods,IdataFolhasAgrupadas} from '@/intefaces/ShowSheetsDataInterface'
+import {IdataFolha, IdataPeriods,IpropsComponetShowData} from '@/intefaces/ShowSheetsDataInterface'
 import generateExportFile from "@/components/others/downloads/filesDownloads";
  
 import { useRouter } from 'next/navigation'
 
- 
-interface Props {
-  sheets: IdataFolha[],
-  periods: IdataPeriods[],
-  sheetsGroup: IdataFolhasAgrupadas[]
-  uuidOrgao:string,
-}
+
 const negateKeys = ['ID','ORGAO','VISUALIZACAO']
 
-export default function TableSheetsPrimary(props:Props) {
+export default function TableSheetsPrimary(props:IpropsComponetShowData) {
   const router = useRouter()
   const files = props.sheets;
   console.log(props)
@@ -55,7 +49,7 @@ export default function TableSheetsPrimary(props:Props) {
   };
 
   const handlePeriod = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    router.push(`/folhas/${props.uuidOrgao}/${event.target.value}`)
+    router.push(`/folhas/${props.uuidOrgao}/${event.target.value}/${props.idTable}`)
   };
   
   return (

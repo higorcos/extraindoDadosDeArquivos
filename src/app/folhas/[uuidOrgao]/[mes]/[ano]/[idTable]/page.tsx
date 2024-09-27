@@ -1,11 +1,12 @@
 import axios from 'axios'
-import {IdataSheetsAndDataGruop} from '@/intefaces/ShowSheetsDataInterface'
+import {IdataSheetsAndDataGruop,OptionSwitchTable} from '@/intefaces/ShowSheetsDataInterface'
 import SwitchTable from '@/components/table/public/SwitchTable'
 
 interface Params{
   uuidOrgao: string,
   mes: string,
-  ano: string
+  ano: string,
+  idTable:OptionSwitchTable,
 }
 interface Props {
   error: boolean,
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export default async function Page({params}:{params:Params}) {
-  const {uuidOrgao, mes, ano}:Params = params
+  const {uuidOrgao, mes, ano,idTable}:Params = params
   
   let inforFolhas: IdataSheetsAndDataGruop = {
     inforPortal: {
@@ -37,8 +38,8 @@ export default async function Page({params}:{params:Params}) {
   }
 
   return ( 
-    <>
-    <SwitchTable sheets={inforFolhas.folhas} periods={inforFolhas.periodos} sheetsGroup={inforFolhas.folhasAgupadas} uuidOrgao={uuidOrgao}/>
+  <>
+    <SwitchTable sheets={inforFolhas.folhas} periods={inforFolhas.periodos} sheetsGroup={inforFolhas.folhasAgupadas} uuidOrgao={uuidOrgao} idTable={idTable}/>
   </>
   )
 }

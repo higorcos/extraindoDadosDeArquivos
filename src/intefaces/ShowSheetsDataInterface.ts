@@ -40,6 +40,14 @@ export interface IdataFolhasAgrupadas{
     VALOR_TOTAL: number
 }
 
+export interface IpropsComponetShowData {
+  sheets: IdataFolha[],
+  periods: IdataPeriods[],
+  sheetsGroup: IdataFolhasAgrupadas[]
+  uuidOrgao:string,
+  idTable: OptionSwitchTable
+}
+
 export interface IdataSheetsAndDataGruop{
   inforPortal: IinforPortal,
   periodos: IdataPeriods[],
@@ -49,4 +57,4 @@ export interface IdataSheetsAndDataGruop{
 
 export type AllowedFileTypes = 'csv' | 'xls' | 'xml' | 'pdf' | 'json';
 
-export type OptionSwitchTable = 0|1|2;
+export type OptionSwitchTable = '0'|'1'|'2';

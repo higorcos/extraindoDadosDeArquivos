@@ -27,14 +27,14 @@ export default async function Page({params}:{params:Params}) {
       console.log('00000000')
     }
 
-    redirectPath=(`/folhas/${uuidOrgao}/${data[0].MES_PERIODO}/${data[0].ANO}`);
+    redirectPath=(`/folhas/${uuidOrgao}/${data[0].MES_PERIODO}/${data[0].ANO}/0`);
 
   }catch(error){
     console.log(error)
     const today = new Date();
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const year = today.getFullYear(); 
-    redirectPath=(`/folhas/${uuidOrgao}/${month}/${year}`); 
+    redirectPath=(`/folhas/${uuidOrgao}/${month}/${year}/0`); 
  
    
   }finally{
