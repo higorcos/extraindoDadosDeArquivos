@@ -14,6 +14,6 @@ export interface IPortalContext  {
         statusPortal: boolean;
 }
 export interface IBoxSelectPortal {
-        activeBox: ()=>void;
+        activeBox: (status:string)=>void;
 }
 

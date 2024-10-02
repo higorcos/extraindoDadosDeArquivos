@@ -25,10 +25,9 @@ export default function SelectPortal({activeBox}:IBoxSelectPortal) {
   useEffect(() => {
     //setRemoveLoading(false)
     const f = async ()=>{
-      await api.get(`/fakeID/portal/show/available`).then((res) => {
-        
-        setOptionPortal(res.data.res);
-        setResultFilterOption(res.data.res)
+      await api.get(`/portais`).then((res) => {
+        setOptionPortal(res.data.data);
+        setResultFilterOption(res.data.data)
         
       }).catch((err)=>{
         console.log('erro')

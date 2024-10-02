@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/View viewing ile data.tsx", "src/app/TESTE.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/View viewing ile data.tsx", "src/app/TESTE.js", "src/services/variables.js"],
   "exclude": ["node_modules"]
 }
