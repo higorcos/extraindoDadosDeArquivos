@@ -1,8 +1,10 @@
 'use client'
 import React,{ createContext, useState, ReactNode} from "react";
-import { IDataPortalInsert, IDataPortalResult, IPortalContext } from "@/intefaces/SelectPortalInterface";
+import { IDataPortalInsert, IDataPortalResult, IPortalContext,  } from "@/intefaces/SelectPortalInterface";
+import { IDataLocalStoragePortal  } from "@/intefaces/PortaisDataInterface";
 
 export const PortalContext = createContext<IPortalContext|undefined>(undefined)
+
 
 export const PortalProvider =({children}: { children: ReactNode })=> {
     
@@ -10,24 +12,24 @@ export const PortalProvider =({children}: { children: ReactNode })=> {
     
     const setPortal = (dataPortal:IDataPortalInsert)=>{
         console.log('o000o',dataPortal)
-        localStorage.setItem('name_PORTAL',dataPortal.name)
-        localStorage.setItem('uuid_PORTAL',dataPortal.uuid)
+        localStorage.setItem('si_fl_name_PORTAL',dataPortal.name)
+        localStorage.setItem('si_fl_uuid_PORTAL',dataPortal.uuid)
 
         const portalAcronym:string = generateAcronym(dataPortal.name)
-        localStorage.setItem('ACRONYM_PORTAL', portalAcronym)
+        localStorage.setItem('si_fl_sigla_nome_portal', portalAcronym)
         const organType:string = portalType(dataPortal.name)
-        localStorage.setItem('TYPE_PORTAL', organType)
+        localStorage.setItem('si_fl_tipo_portal_selecionado', organType)
 
         setStatusPortal(!statusPortal)
         
     }
     //@@
     //Adicionar Tipagem
-    const showPortal= {
-        NOME: localStorage.getItem('name_PORTAL'),
-        UUID: localStorage.getItem('uuid_PORTAL'),
-        ACRONYM: localStorage.getItem('ACRONYM_PORTAL'),
-        TYPE: localStorage.getItem('TYPE_PORTAL'),
+    const showPortal:IDataLocalStoragePortal = {
+        NOME: localStorage.getItem('si_fl_name_PORTAL'),
+        UUID: localStorage.getItem('si_fl_uuid_PORTAL'),
+        ACRONYM: localStorage.getItem('si_fl_sigla_nome_portal'),
+        TYPE: localStorage.getItem('si_fl_tipo_portal_selecionado'),
     }
     const generateAcronym =(name:string)=>{
         

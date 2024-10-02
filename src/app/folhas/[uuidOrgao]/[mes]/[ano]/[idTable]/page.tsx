@@ -1,7 +1,7 @@
-import axios from 'axios'
 import {IdataSheetsAndDataGruop,OptionSwitchTable} from '@/intefaces/ShowSheetsDataInterface'
 import SwitchTable from '@/components/table/public/SwitchTable'
 import {FormatData} from '@/components/others/FormatData';
+import api from '@/services/api';
 
 interface Params{
   uuidOrgao: string,
@@ -30,7 +30,7 @@ export default async function Page({params}:{params:Params}) {
 };
 
   try{
-    const {data: resultFetch}:{data:Props} = await axios.get(`http://localhost:8008/folha/${uuidOrgao}/searchByPeriodAndTables/${mes}/${ano}`)
+    const {data: resultFetch}:{data:Props} = await api.get(`/folha/${uuidOrgao}/searchByPeriodAndTables/${mes}/${ano}`)
     const {data}:{data:IdataSheetsAndDataGruop} = resultFetch
     inforFolhas['periodos'] = data['periodos'];
     inforFolhas['inforPortal'] = data['inforPortal'];

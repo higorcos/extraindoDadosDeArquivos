@@ -14,6 +14,23 @@ interface AuthContextProps {
   }
 export const AuthContext = createContext<AuthContextProps|undefined>(undefined);
 
+function isTokenExpired(token: string): boolean {
+    // Divida o token para pegar a parte do payload
+    const payloadBase64 = token.split('.')[1];  // Pega a segunda parte do token (payload)
+    
+    // Decodifica o payload
+    const decodedPayload = JSON.parse(atob(payloadBase64));
+    
+    // O campo `exp` contém o tempo de expiração em segundos (Unix Time)
+    const expirationTime = decodedPayload.exp;
+  
+    // Pega o tempo atual em segundos
+    const currentTime = Math.floor(Date.now() / 1000);
+  
+    // Verifica se o token está expirado
+    return currentTime > expirationTime;
+  }
+
 export const AuthProvider =({children}: { children: ReactNode })=> {    
     const router = useRouter();
 
@@ -25,6 +42,14 @@ export const AuthProvider =({children}: { children: ReactNode })=> {
     useEffect(()=>{
         const recoveryUser:string|null = localStorage.getItem('userWk_folha_de_pagamento')
         const recoveryToken = localStorage.getItem('tokenUserWK_folha_de_pagamento')
+
+        if(recoveryToken){
+            if(isTokenExpired(recoveryToken)){
+              setStatusUser(false)
+              logout()
+              router.push('/login') 
+            }
+        }
         
         if(recoveryUser && recoveryToken){
             setUser(recoveryUser)
@@ -39,7 +64,7 @@ export const AuthProvider =({children}: { children: ReactNode })=> {
     },[])
     
     const login = (email:string, password:string)=>{
-        //6cbe71077b4d0ab32f893a0633a3cb822484ea63 == Prefeitura Modelo
+
     api.post(`/user/login`,{
             email:email,
             password:password
@@ -60,18 +85,13 @@ export const AuthProvider =({children}: { children: ReactNode })=> {
         router.push('/') 
         
         }else{// se não tiver autorização
-        setStatusUser(false)
-        
-        AlertError('Login inválido')
-        
-        /* navigate(0); */
-        
+        setStatusUser(false)       
+        AlertError('Login inválido')  
             
         }
     }).catch((err)=> {
         setStatusUser(false)
         AlertError('Login inválido')
-        /* navigate(0); */
    
     })
     

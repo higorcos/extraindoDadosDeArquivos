@@ -20,12 +20,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       return
     }
     if (!authenticated) {
-      // console.log('não tá logado')
       redirect('/login')
-
     }
-    // console.log('logado')
-
+    
     return children
 
   }

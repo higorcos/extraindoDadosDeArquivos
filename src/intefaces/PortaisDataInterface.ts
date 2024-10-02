@@ -52,4 +52,10 @@ export interface IDataPortal {
     ESICSERVIDORFUNCAO: string;
     CAMINHOCERTIFICADO: string;
   }
+export interface IDataLocalStoragePortal{
+    NOME: string|null,
+    UUID: string|null,
+    ACRONYM: string|null,
+    TYPE: string|null,
+  }
   

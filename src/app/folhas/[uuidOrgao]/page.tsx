@@ -1,7 +1,7 @@
-import axios from 'axios'
 import TableSheetsPrimary from "@/components/table/public/TableSheetsPrimary"
 import { redirect } from 'next/navigation';
 import { IdataPeriods} from '@/intefaces/ShowSheetsDataInterface'
+import api from '@/services/api';
 
 
 interface PropsPeriods{
@@ -18,8 +18,7 @@ export default async function Page({params}:{params:Params}) {
   
 
   try{
- 
-    const {data: resultFetch}:{data:PropsPeriods} = await axios.get(`http://localhost:8008/folha/${uuidOrgao}/showPeriods`)
+    const {data: resultFetch}:{data:PropsPeriods} = await api.get(`/folha/${uuidOrgao}/showPeriods`)
 
     const {data}:{data:IdataPeriods[]} = resultFetch
 

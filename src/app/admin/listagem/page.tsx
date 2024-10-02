@@ -1,29 +1,38 @@
 'use client'
-import React, { FormEvent, useState, useEffect, CSSProperties } from 'react'
+import React, { useContext, useState, useEffect, CSSProperties } from 'react'
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios'
+
 import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
+import api from '@/services/api';
+import { IDataLocalStoragePortal  } from "@/intefaces/PortaisDataInterface";
+import { PortalContext } from "@/context/PortalContext"; 
 
 
 export default function PageListagemFolhasAdm() {
     const [data, setData] = useState<any>(null);
 
+    const portalContext = useContext(PortalContext);
+    if (!portalContext) {
+      throw new Error('Error portalContext');
+    }
+    const showPortal:IDataLocalStoragePortal  = portalContext.showPortal;
    
     useEffect(()=>{
+
       onSubmit()
     },[])
+
+
   
 
     async function onSubmit() {
     
       
       try{
-  
-      const resultado:any = await axios.get('http://localhost:3003/listagem')
+      const resultado:any = await api.get(`/folha/${showPortal.UUID}/listAll`)
       console.log(resultado)
         AlertSuccess("Sucesso no carregamento")
         const {result} = resultado.data
-        console.log(result)
         setData(result)
         return {error: false, result}
 

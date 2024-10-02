@@ -3,6 +3,8 @@ import React, {useState } from 'react'
 import "react-toastify/dist/ReactToastify.css";
 import { AlertError, AlertSuccess } from '@/ultils/alert';
 import Image from 'next/image';
+import imageTCEMA from '@/../public/img/tce-ma.png'
+import imageTCEPI from '@/../public/img/tce-pi.png'
 
 
 export default function SelectTypeTCE(props:any) {
@@ -46,7 +48,7 @@ export default function SelectTypeTCE(props:any) {
           <Image 
               width={500}
               height={500}
-              src="/img/tce-ma.png"
+              src={imageTCEMA}
               alt="Icone tribuna de contas do maranhão"/>
         </div>
         <div 
@@ -56,7 +58,7 @@ export default function SelectTypeTCE(props:any) {
           <Image 
               width={500}
               height={500}
-              src="/img/tce-pi.png"
+              src={imageTCEPI}
               alt="Icone tribuna de contas do Piaui"/>
         </div>
       </div>
