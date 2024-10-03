@@ -23,6 +23,11 @@ export interface IdataPeriods{
   MES_PERIODO: string,
   ANO: string
 }
+export interface IdataAllPeriods{
+  MES_PERIODO: string,
+  ANO: string,
+  VISUALIZACAO: 0 | 1
+}
 
 export interface IinforPortal{
   ID:string

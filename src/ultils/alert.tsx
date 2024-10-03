@@ -18,6 +18,16 @@ export function AlertError(msg:string) {
 }
 export function AlertDefault(msg:string) {
     toast.info(`${msg}`, {
-    position: "bottom-center"
+    position: "top-right"
     });
+}
+export function AlertLoading(msg:string) {
+    const id = toast.loading(`${msg}`, {
+    position: "top-right",
+    autoClose: 60
+    });
+    return id
+}
+export function AlertUpdateLoading(id:any, type:"error"|"success", msg:string) {
+    toast.update(id,{ render: msg, type:type, isLoading: false,position: "top-right" , autoClose: 1500 })
 }

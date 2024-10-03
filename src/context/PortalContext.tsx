@@ -25,12 +25,14 @@ export const PortalProvider =({children}: { children: ReactNode })=> {
     }
     //@@
     //Adicionar Tipagem
-    const showPortal:IDataLocalStoragePortal = {
-        NOME: localStorage.getItem('si_fl_name_PORTAL'),
-        UUID: localStorage.getItem('si_fl_uuid_PORTAL'),
-        ACRONYM: localStorage.getItem('si_fl_sigla_nome_portal'),
-        TYPE: localStorage.getItem('si_fl_tipo_portal_selecionado'),
-    }
+
+    const showPortal: IDataLocalStoragePortal = {
+      NOME: typeof window !== "undefined" ? localStorage.getItem('si_fl_name_PORTAL') : null,
+      UUID: typeof window !== "undefined" ? localStorage.getItem('si_fl_uuid_PORTAL') : null,
+      ACRONYM: typeof window !== "undefined" ? localStorage.getItem('si_fl_sigla_nome_portal') : null,
+      TYPE: typeof window !== "undefined" ? localStorage.getItem('si_fl_tipo_portal_selecionado') : null,
+    }; 
+    
     const generateAcronym =(name:string)=>{
         
         if(name.indexOf("Câmara") >= 0){

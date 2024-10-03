@@ -103,7 +103,7 @@ async function onSubmit() {
       "Content-Type": "multipart/form-data",
     }
   })
-  console.log(result)
+  console.log(result) 
     AlertSuccess("Folha Cadastrada")
     AlertWarning("Entre na Pagina /admin/listagem")
     

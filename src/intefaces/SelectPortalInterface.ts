@@ -1,3 +1,5 @@
+import { IDataLocalStoragePortal  } from "@/intefaces/PortaisDataInterface";
+
 export interface IDataPortalInsert {
         name: string,
         uuid: string,
@@ -10,7 +12,7 @@ export interface IDataPortalResult {
 }
 export interface IPortalContext  {
         setPortal:(obj:IDataPortalInsert)=> void;
-        showPortal: any;
+        showPortal: IDataLocalStoragePortal;
         statusPortal: boolean;
 }
 export interface IBoxSelectPortal {
