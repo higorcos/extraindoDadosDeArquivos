@@ -12,7 +12,7 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: "Sistema Folha de pagamento",
+  title: "Folhas de pagamentos - Workcenter",
   description: "Registro de folhas",
 };
 

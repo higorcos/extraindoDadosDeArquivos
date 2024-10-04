@@ -14,6 +14,7 @@
 .iconeDownload{
   margin-top: 7px;
   width: 30px;
+  cursor: pointer;
 }
 .imgSearchPortarias{
     display: flex;
@@ -71,13 +72,13 @@ input[type="text" i].formInput{
     font-size: 1.1rem !important; 
     position: absolute ;
     top: -0.7rem !important;
-   left: 0.8rem !important;  
+    left: 0.8rem !important;  
    
     padding: 0 0.5rem;
     color: #000080;/*  var(--cor-nome-portal ); */
     cursor: text;
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-    background-color: #ffff;
+    background-color: #e0e0e0;
   }
 
 
@@ -140,6 +141,84 @@ td.thTitlePortais.tdTable a:hover {
 }
 
 
+/* Estilo do select */
+select.customSelect {
+
+  width: 15rem;
+  height: 4rem;
+  font-size: 1.2rem; 
+  border: 2px solid #000080; 
+  border-right: 2px solid transparent;
+  border-radius: 15px 15px 15px 15px;
+  padding: 1rem;
+  color: rgb(0, 0, 0);
+  outline: none;
+  background: none;
+  appearance: none; /* Remove o estilo padrão do select */
+  cursor: pointer;
+}
+.aaa{
+  font-size: 1.1rem;
+  color: #000080;
+  margin-bottom: 5px;
+  display: block; /* Garante que a label fique em linha separada */
+  position: absolute;
+  top: -0.7rem !important; /* Ajuste esse valor conforme necessário para alinhar a label no topo */
+  left: 0.8rem !important; /* Alinha a label à esquerda */
+  background-color: #e0e0e0; /* Cor de fundo da label */
+  padding: 0 5px; /* Cria um pequeno espaçamento em torno do texto da label */
+}
+.selectContainer {
+ /*  display: flex;
+  align-items: center;
+  position: relative; */
+  position: relative;
+  /* width: 200px; */ /* Ajuste conforme necessário */
+  margin-bottom: 20px; /* Espaço abaixo do select */
+}
+
+.selectArrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  border: 2px solid #000080;
+  border-radius: 0px 15px 15px 0px;
+  border-left: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectArrow svg {
+  fill: #000080; /* Cor da seta */
+  width: 20px;
+}
+section.tableShowPortarias.tableFilesSacop{
+ width: 100px;
+ font-size: .1em !important;
+}
+
+.thPortariasTable{
+  text-transform: uppercase;
+  padding: 0 10px;
+}
+
+.bodyTable{
+  
+}
+.titleTable{
+  
+}
+.dataCollum{
+  text-transform: uppercase;
+  padding: 0 16px;
+}
+.dataSheetsGroup{
+  text-transform: uppercase;
+  padding: 0;
+}
 
 
 @media screen and (max-width: 670px) {  
@@ -153,10 +232,33 @@ h6.section-title{
 }
 }
 @media screen and (max-width: 540px) {  
-  .fromPortarias {
-    width: 10rem;
-    height: 3.2rem;
+.fromPortarias {
+  width: 11rem;
+  height: 3.2rem;
+  margin-bottom: 20px;
 }
+.selectContainer {
+  width: 10rem;
+  height: 3.2rem;
+ }
+ select.customSelect {
+  width: 10rem;
+  height: 3.2rem;
+ }
+
+ section.box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+input[type="text" i].formInput{
+  border-radius: 15px 15px 15px 15px;
+ 
+}
+
+
   .imgSearchPortarias {
     right: -136px;
 }
@@ -226,9 +328,13 @@ section.footerPaginationTable{
         color: var(--diary-table-txt);
         font-weight: 500;
 }
+
+
 .tableShowPortarias.tableFilesSacop .table>:not(caption)>*>* {
   text-align: initial;
 }
 table#filesSacop {
+  text-transform: uppercase;
+}section.tableShowPortarias{
   text-transform: uppercase;
 }

@@ -3,7 +3,7 @@ import { useEffect,useState} from "react";
 import { Table } from "react-bootstrap";
 import Pagination from 'react-bootstrap/Pagination';
 import styles from '@/components/table/Table.module.css'
-import {IdataFolha, IdataPeriods,IpropsComponetShowData, IdataFolhasAgrupadas, OptionSwitchTable} from '@/intefaces/ShowSheetsDataInterface'
+import {IdataFolha, IdataPeriods, IdataFolhasAgrupadas, OptionSwitchTable} from '@/intefaces/ShowSheetsDataInterface'
 import generateExportFile from "@/components/others/downloads/filesDownloads";
 import { useRouter } from 'next/navigation'
 import { nameMonth } from "@/components/others/FormatData";
@@ -12,19 +12,19 @@ import { nameMonth } from "@/components/others/FormatData";
 
 export interface IpropsFunctionTable {
   sheets: IdataFolha[],
-  sheetsNow: IdataFolha[],
+  sheetsNow: IdataFolhasAgrupadas[],
   periods: IdataPeriods[],
   sheetsGroup: IdataFolhasAgrupadas[]
   uuidOrgao:string,
   idTable: OptionSwitchTable,
   negateKeys: string[],
-  resultFilter: (value: IdataFolha[])=>void,
+  resultFilter: (value: IdataFolhasAgrupadas[])=>void,
 }
 
 export default function FuncionsTable(props:IpropsFunctionTable) {
   const router = useRouter()
-  const files = props.sheets;
-  const [inforSheets,setInforSheets] = useState<IdataFolha[]>(files)
+  const files = props.sheetsGroup;
+  const [inforSheets,setInforSheets] = useState<IdataFolhasAgrupadas[]>(files)
   
   useEffect(()=>{
     setInforSheets(files)
@@ -32,23 +32,14 @@ export default function FuncionsTable(props:IpropsFunctionTable) {
   const filtrarTabela = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valueFilter = e.target.value.toLowerCase();
      console.log(files)
-    const dadosFiltrados: IdataFolha[]  = files.filter((item) =>
-      item.NOME.toLowerCase().includes(valueFilter) ||
-      item.MES_PERIODO.toLowerCase().includes(valueFilter) ||
-      item.ANO.toLowerCase().includes(valueFilter) ||
+    const dadosFiltrados: IdataFolhasAgrupadas[]  = files.filter((item) =>
       item.TIPO_FOLHA.toLowerCase().includes(valueFilter) ||
-      item.ORGAO.toLowerCase().includes(valueFilter) ||
-      item.CPF.toLowerCase().includes(valueFilter) ||
-      item.MATRICULA.toLowerCase().includes(valueFilter) ||
-      item.CBO.toLowerCase().includes(valueFilter) ||
+     (item.VINCULO ? item.VINCULO.toLowerCase().includes(valueFilter) : false) ||
       item.CARGO.toLowerCase().includes(valueFilter) ||
-      item.LOTACAO.toLowerCase().includes(valueFilter) ||
-      (item.VINCULO ? item.VINCULO.toLowerCase().includes(valueFilter) : false) ||
-      item.DATAADMISSAO.toLowerCase().includes(valueFilter) ||
-      item.CARGAHORARIA.toLowerCase().includes(valueFilter) ||
       item.VALORBRUTO.toString().includes(valueFilter) ||
-      item.VALORLIQUIDO.toString().includes(valueFilter) ||
-      item.VALORDESCONTO.toString().includes(valueFilter)
+      item.VALOR_TOTAL.toString().includes(valueFilter) ||
+      item.CONTAGEM.toString().includes(valueFilter) 
+     
     );
     props.resultFilter(dadosFiltrados);
   };

@@ -12,6 +12,10 @@ export function FormatData(data:any, keys:any){
             value = newFormatDate;
           }
 
+          if(key.toLocaleUpperCase().includes("MES_PERIODO")){
+            value = nameMonth(value)
+          }
+
           if (key.toLocaleUpperCase().includes("CNPJ")) {
             // se for cnpj
 
@@ -106,5 +110,24 @@ export function formatMonth(month:string){
     10: "11",
     11: "12",
   };
+  return nameMonth[month]
+}
+
+export function nameMonth(month:string){
+  const nameMonth: any = {
+    '01': "Janeiro",
+    '02': "Fevereiro",
+    '03': "Março",
+    '04': "Abril",
+    '05': "Maio",
+    '06': "Junho",
+    '07': "Julho",
+    '08': "Agosto",
+    '09': "Setembro",
+    '10': "Outubro",
+    '11': "Novembro",
+    '12': "Dezembro"
+};
+
   return nameMonth[month]
 }

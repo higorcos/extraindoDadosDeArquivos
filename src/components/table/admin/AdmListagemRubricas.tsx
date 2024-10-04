@@ -23,8 +23,7 @@ export default function AdmListagemRubricas(props:Iprops) {
      
     useEffect(()=>{
       const fetchData = async () => {
-        const idAlert = AlertLoading('ii')
-        console.log(idAlert)
+        const idAlert = AlertLoading('Carregando')
         try{
           const resultado:any = await api.get(`/folha/${props.uuid}/searchByPeriodAndNotDisplayed/${props.mes}/${props.ano}`)
             AlertUpdateLoading(idAlert,'success',"Sucesso no carregamento")

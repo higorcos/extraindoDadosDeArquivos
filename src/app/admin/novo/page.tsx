@@ -1,14 +1,16 @@
 'use client'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "react-toastify/dist/ReactToastify.css";
 import SelectTypeFormt from '../../../components/others/SelectTypeTCE';
 import InsertFile from '../../../components/firstInsertion/LayoutInsertFile';
 import InsertFileRubricas from '../../../components/LastInsertion/LayoutInsertFileRubricas';
-import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
+import { AlertError, AlertSuccess, AlertWarning,AlertLoading, AlertUpdateLoading } from '@/ultils/alert';
 import {TypeColumunsDataInsert} from '../../../intefaces/TypeColumunsDataInsertInterface'  
 import {TypeColumunsDataInsertRubricas} from '../../../intefaces/TypeColumunsDataInsertInterfaceRubricas'  
 import InsertReferences from '../../../components/firstInsertion/FileTableView';
 import InsertReferencesRubricas from '@/components/LastInsertion/FileTableViewRubricas';
+import LoadingFull from '@/components/others/LoadingFull';
+import ActionAfterUpload from '@/components/others/ActionAfterUpload';
 import api from '@/services/api';
 import { IDataLocalStoragePortal  } from "@/intefaces/PortaisDataInterface";
 import { PortalContext } from "@/context/PortalContext"; 
@@ -17,6 +19,9 @@ export default function PageInsertFile() {
 
 const [file, setFile] = useState<File | null>(null);
 const [renderSelectType, setRenderSelectType] = useState<boolean>(true);
+const [loading, setLoading] = useState<boolean>(false);
+
+const [boxActionAfterUpload, setBoxActionAfterUpload] = useState<boolean>(false);
 const [showFileReferencesLayout, setShowFileReferencesLayout] = useState<boolean>(false);
 const [showInsertLayout, setShowInsertLayout] = useState<boolean>(false);
 const [returnInput, setReturnInput] = useState<TypeColumunsDataInsert | null>(null);
@@ -31,6 +36,7 @@ const portalContext = useContext(PortalContext);
 if (!portalContext) {
   throw new Error('Error portalContext');
 }
+
 const showPortal:IDataLocalStoragePortal  = portalContext.showPortal;
 
 const valueFile = (value:any) => {
@@ -69,10 +75,12 @@ const fClickTCE_PI = () =>{
 }
 
 async function onSubmit() {
-        
+         
   if (!file || !returnInput) return;
   if (!fileRubricas || !returnInput) return;
-  
+  const idAlert = AlertLoading('Enviando dados')
+  setLoading(true)
+
 
   const formData = new FormData()
   formData.append("fileFolha", file);
@@ -101,19 +109,23 @@ async function onSubmit() {
   const result = await api.post(`/folha/${showPortal.UUID}`,formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-    }
+    },
+      timeout: 300000// Tempo de espera de 10 segundos
+    
   })
-  console.log(result) 
-    AlertSuccess("Folha Cadastrada")
-    AlertWarning("Entre na Pagina /admin/listagem")
+  console.log(result)  
+    AlertUpdateLoading(idAlert,'success',"Sucesso, folhas cadastradas")
+    setBoxActionAfterUpload(true)
     
     return {error: false, result}
 
   }catch(error){
-    AlertError("Erro, Verifique os parametros")
+    AlertUpdateLoading(idAlert,'error',"Erro, verifique possíveis erros")
     return {error: true, msgError:error ,result:[]}
 
-  }  
+  }finally{
+    setLoading(false)
+  } 
 }
 
 return (
@@ -138,6 +150,9 @@ return (
             <><InsertReferencesRubricas typeTCE={"PI"} setValueParent={valuesSelectRubricas} dataFile={fileRubricas} /></>}
         </>}
       </>}
+      
+      {boxActionAfterUpload && <ActionAfterUpload/>}
+      {loading && <LoadingFull/>} 
     </>
 );
 }
