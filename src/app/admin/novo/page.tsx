@@ -9,6 +9,7 @@ import {TypeColumunsDataInsert} from '../../../intefaces/TypeColumunsDataInsertI
 import {TypeColumunsDataInsertRubricas} from '../../../intefaces/TypeColumunsDataInsertInterfaceRubricas'  
 import InsertReferences from '../../../components/firstInsertion/FileTableView';
 import InsertReferencesRubricas from '@/components/LastInsertion/FileTableViewRubricas';
+import FloatingButton from '@/components/others/FloatingButton'
 import LoadingFull from '@/components/others/LoadingFull';
 import ActionAfterUpload from '@/components/others/ActionAfterUpload';
 import api from '@/services/api';
@@ -130,6 +131,8 @@ async function onSubmit() {
 
 return (
     <>
+    <FloatingButton/>
+    
     {renderSelectType && <SelectTypeFormt clickTCE_MA={fClickTCE_MA} clickTCE_PI={fClickTCE_PI}/>}
     {showInsertLayout && <InsertFile setValueParent={valueFile}/>}
     {showInsertLayoutRubricas && <InsertFileRubricas setValueParent={valueFileRubricas}/>}

@@ -8,6 +8,7 @@ import { IDataLocalStoragePortal } from "@/intefaces/PortaisDataInterface";
 import { IdataAllPeriods } from "@/intefaces/ShowSheetsDataInterface";
 import { PortalContext } from "@/context/PortalContext";
 import AdmListagemRubricas from '@/components/table/admin/AdmListagemRubricas'
+import FloatingButton from '@/components/others/FloatingButton'
 
 export default function PageListagemFolhasAdm() {
   const [data, setData] = useState<IdataAllPeriods[]>([]);
@@ -89,9 +90,11 @@ export default function PageListagemFolhasAdm() {
 
   return (
     <>
-      <div className="w-3/5 bg-fundo-n1 p-5 rounded-lg shadow-md text-cor-primaria">
+      <FloatingButton/>
+      <div className={'fixed top-[0] left-[0] bottom-[0] right-[0] flex justify-center items-center flex-col z-50'}>
+      <div className="w-3/5 bg-fundo-n1 p-4 rounded-lg shadow-md text-cor-primaria ">
         <div className="mb-8">
-          <p className="text-xl mb-4 font-[600]">Folhas Por Periodo:</p>
+          <p className="text-xl mb-2 font-[600]">Folhas Por Periodo:</p>
           <div
             className="w-full h-[300px] border-2 border-dotted border-cor-primaria bg-fundo-n2 rounded-lg pb-10"
             style={tableStyle}
@@ -115,8 +118,6 @@ export default function PageListagemFolhasAdm() {
                     <td className="px-6 py-4">{i.MES_PERIODO}</td>
                     <td className="px-6 py-4">{i.ANO}</td>
                     <td className="px-6 py-4 flex">  
-                      {/* justify-center  */}
-                    {/*   <p>{i.VISUALIZACAO == 1 ? 'Visível':'Não visível'}</p> */}
                       <input
                         type="checkbox"
                         className="cursor-pointer"
@@ -142,6 +143,8 @@ export default function PageListagemFolhasAdm() {
             </table>
           </div>
         </div>
+      
+      </div>
       </div>
      
       {showListNames && <AdmListagemRubricas mes={month} ano={year} uuid={showPortal.UUID} handleChangeVisibility={handleChangeVisibility}/>}

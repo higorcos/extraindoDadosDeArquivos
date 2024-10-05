@@ -45,6 +45,8 @@ export default async function Page({params}:{params:Params}) {
 
   return ( 
   <>
+  <section className={`flex flex-col justify-between h-screen zsfgasfgs`}> {/* h-[200vh] */}
+
     <SwitchTable 
       sheets={inforFolhas.folhas} 
       periods={inforFolhas.periodos} 
@@ -52,6 +54,8 @@ export default async function Page({params}:{params:Params}) {
       inforPortal={inforFolhas.inforPortal}
       uuidOrgao={uuidOrgao} 
       idTable={idTable}/>
+      {/* Rodapé aqui */}
+    </section>
   </>
   )
 }

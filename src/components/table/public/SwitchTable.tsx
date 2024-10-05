@@ -25,7 +25,7 @@ export default function SwitchTable(props:IpropsComponetShowData) {
   const a = 'border-b-[2px] border-[#000080]'
 
   return (
-      <>
+      <div>
       <div className="flex flex-col items-center p-[20px] text-[#000080] uppercase">
         <h1 className="text-[1.3em] text-wrap font-semibold">Folha de pagamentos</h1>
         <p className="text-[1em]">{props.inforPortal.NOME}</p>
@@ -48,6 +48,6 @@ export default function SwitchTable(props:IpropsComponetShowData) {
         {optionSwitchTable == '0' && <TableSheetsPrimary {...props} idTable={'0'}/>}
         {optionSwitchTable == '1' && <TableSheetsSecondary {...props} idTable={'1'}/>}
         {optionSwitchTable == '2' && <TableSheetsTertiary {...props} idTable={'2'}/>}  
-  </>
+  </div>
   )}
          
