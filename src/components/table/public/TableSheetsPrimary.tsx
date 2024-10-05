@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState} from "react";
-import { Table } from "react-bootstrap";
 import FuncionsTable from "../ultils/FuncionsTable";
 import Pagination from "../ultils/Pagination";
 import styles from '@/components/table/Table.module.css'
@@ -45,7 +44,7 @@ export default function TableSheetsPrimary(props:IpropsComponetShowData) {
     <section className={`${styles.tableShowPortarias}${styles.tableFilesSacop} flex flex-col items-center overflow-x-auto`}>
       <br/>
       
-      <Table responsive id="filesSacop" className="!text-[.7em]">
+      <table id="filesSacop" className="!text-[.7em]">
         <thead>
           <tr className={styles.titleTable}>
             <th className={styles.thPortariasTable}>Matrícula</th>
@@ -93,9 +92,8 @@ export default function TableSheetsPrimary(props:IpropsComponetShowData) {
           
 
         </tbody>
-      </Table>
-
-
+      </table>
+    </section> 
       <Pagination 
         currentPage={currentPage} 
         itemsPerPage={itemsPerPage} 
@@ -104,6 +102,5 @@ export default function TableSheetsPrimary(props:IpropsComponetShowData) {
         setNewCurrentPage={setNewCurrentPage}
         sizeData={inforSheets.length}
         />
-    </section> 
   </>)}
          

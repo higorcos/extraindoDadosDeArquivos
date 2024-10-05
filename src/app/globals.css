@@ -8,6 +8,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,7 +25,7 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--background-color) !important;
   /*
   display: flex;
   justify-content: center;
@@ -32,7 +33,32 @@ body {
   height: 100vh;
   flex-direction: column; */
 }
+li a.page-link span {
+  color: #000080 !important;
+}
 
+span.page-link {
+  color: #000080 !important;
+  background-color: #0000806b !important;
+}
+span.page-link:disabled {
+  color: #000080 !important;
+  background-color: #00008042 !important;
+  border-color: #00008042 !important;
+}
+
+li a.page-link {
+  color: #000080 !important;
+  background-color: #a2a2a2 !important;
+
+}
+li a.page-link:hover {
+  color: #000080 !important;
+  background-color: #a2a2a2 !important;
+}
+.page-link:focus {
+  box-shadow:  0 0 0 0.25rem #00008042 !important;
+}
 
 
 @layer utilities {

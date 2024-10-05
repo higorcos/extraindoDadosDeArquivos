@@ -1,6 +1,5 @@
 "use client"
 import { useState} from "react";
-import { Table } from "react-bootstrap";
 import FuncionsTable from "../ultils/FuncionsTable";
 import styles from '@/components/table/Table.module.css'
 import {IdataFolha,IpropsComponetShowData} from '@/intefaces/ShowSheetsDataInterface'
@@ -26,7 +25,7 @@ export default function TableSheetsTertiary(props:IpropsComponetShowData) {
       />
     <section className={`${styles.tableShowPortarias}${styles.tableFilesSacop} flex flex-col items-center overflow-x-auto`}>
       <br/>
-      <Table responsive id="filesSacop" className="!text-[.7em]">
+      <table  id="filesSacop" className="!text-[.7em]">
         <thead>
           <tr className={styles.titleTable}>
             <th className={styles.thPortariasTable}>Matrícula</th>
@@ -72,10 +71,13 @@ export default function TableSheetsTertiary(props:IpropsComponetShowData) {
   ))} 
           
         </tbody>
-      </Table>
-      
-
-     
+      </table>
     </section> 
+    <section className={`flex flex-col items-center`}>
+
+    {inforSheets.length == 0 && <h6 className={`text-[#000080] !text-[1.1em] my-[160px]`}>Nenhum Resultado Encontrado</h6>}
+    <div className={`text-[#000080] !text-[.7em]`}>{`${inforSheets.length} resultados`}</div>
+    </section>
+    
   </>)}
          

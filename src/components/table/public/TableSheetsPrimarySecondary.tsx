@@ -1,5 +1,4 @@
 "use client"
-import { Table } from "react-bootstrap";
 import { useEffect, useState} from "react";
 import Pagination from "../ultils/Pagination";
 import styles from '@/components/table/Table.module.css'
@@ -44,7 +43,7 @@ export default function TableSheetsSecondary(props:IpropsComponetShowData) {
    
       <section className={`flex flex-col items-center overflow-x-auto`}>
         <br/>
-        <Table responsive id="Folhas de Cargos e funções" className="!text-[.8em]">
+        <table  id="Folhas de Cargos e funções" className="!text-[.8em]">
           <thead>
             <tr className={styles.titleTable}>
               <th className={`px-[60px] `}>Tipo Folha</th>
@@ -67,7 +66,8 @@ export default function TableSheetsSecondary(props:IpropsComponetShowData) {
               </tr>
           ))}     
           </tbody>
-        </Table>
+        </table>
+      </section> 
         <Pagination 
           currentPage={currentPage} 
           itemsPerPage={itemsPerPage} 
@@ -76,6 +76,5 @@ export default function TableSheetsSecondary(props:IpropsComponetShowData) {
           setNewCurrentPage={setNewCurrentPage}
           sizeData={inforSheets.length}
           />
-      </section> 
   </>)}
          
