@@ -1,8 +1,6 @@
 "use client"
-import { useEffect, useState} from "react";
+import { useState} from "react";
 import { Table } from "react-bootstrap";
-import { useRouter } from 'next/navigation'
-import Pagination from 'react-bootstrap/Pagination';
 import FuncionsTable from "../ultils/FuncionsTable";
 import styles from '@/components/table/Table.module.css'
 import {IdataFolha,IpropsComponetShowData} from '@/intefaces/ShowSheetsDataInterface'
@@ -10,16 +8,8 @@ import {IdataFolha,IpropsComponetShowData} from '@/intefaces/ShowSheetsDataInter
 const negateKeys = ['ID','ORGAO','VISUALIZACAO']
 
 export default function TableSheetsTertiary(props:IpropsComponetShowData) {
-  const router = useRouter()
   const files = props.sheets;
-
   const [inforSheets,setInforSheets] = useState<IdataFolha[]>(files)
-  const [sizeData, setSizeData] = useState<number>(0);
-
-  useEffect(()=>{
-    setSizeData(inforSheets.length)
-  },[inforSheets])
- 
 
   const resultFilter = (filteredData:IdataFolha[]) => {
     setInforSheets(filteredData);
@@ -81,8 +71,6 @@ export default function TableSheetsTertiary(props:IpropsComponetShowData) {
 
   ))} 
           
-          
-
         </tbody>
       </Table>
       

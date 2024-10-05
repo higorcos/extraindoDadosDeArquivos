@@ -1,28 +1,25 @@
 "use client"
 import { useEffect, useState} from "react";
 import { Table } from "react-bootstrap";
-import { useRouter } from 'next/navigation'
-import Pagination from 'react-bootstrap/Pagination';
 import FuncionsTable from "../ultils/FuncionsTable";
+import Pagination from "../ultils/Pagination";
 import styles from '@/components/table/Table.module.css'
 import {IdataFolha,IpropsComponetShowData} from '@/intefaces/ShowSheetsDataInterface'
 
 const negateKeys = ['ID','ORGAO','VISUALIZACAO']
 
 export default function TableSheetsPrimary(props:IpropsComponetShowData) {
-  const router = useRouter()
   const files = props.sheets;
 
   const [inforSheets,setInforSheets] = useState<IdataFolha[]>(files)
-  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [currentPage, setCurrentPage] = useState<number>(1); //Pagina Atual
   const [itemsPerPage] = useState<number>(10); // Número de itens por página
   const [sizeData, setSizeData] = useState<number>(0);
-  
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = inforSheets.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLastItem:number = currentPage * itemsPerPage; //Indice do primeiro item
+  const indexOfFirstItem:number = indexOfLastItem - itemsPerPage; //Indice do ultimo item
+  const currentItems:IdataFolha[] = inforSheets.slice(indexOfFirstItem, indexOfLastItem); //array resultante
 
-  
   useEffect(()=>{
     setSizeData(inforSheets.length)
   },[inforSheets])
@@ -30,7 +27,11 @@ export default function TableSheetsPrimary(props:IpropsComponetShowData) {
   const resultFilter = (filteredData:IdataFolha[]) => {
     setInforSheets(filteredData);
   };
-  
+
+  const setNewCurrentPage=(value:number)=>{
+    setCurrentPage(value)
+  }
+
   return (
     <>
     
@@ -43,6 +44,7 @@ export default function TableSheetsPrimary(props:IpropsComponetShowData) {
    
     <section className={`${styles.tableShowPortarias}${styles.tableFilesSacop} flex flex-col items-center overflow-x-auto`}>
       <br/>
+      
       <Table responsive id="filesSacop" className="!text-[.7em]">
         <thead>
           <tr className={styles.titleTable}>
@@ -94,47 +96,14 @@ export default function TableSheetsPrimary(props:IpropsComponetShowData) {
       </Table>
 
 
-        {/* Paginação */}
-        <div>
-        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
-          Anterior
-        </button>
-        <span>Página {currentPage}</span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={indexOfLastItem >= inforSheets.length}
-        >
-          Próxima
-        </button>
-      </div>
-      {/*
-      <section className={styles.footerPaginationTable}>
-      {inforSheets?.length > numberViews ? <p>{inforSheets.length == 0 ? <>0 </> : <>{countMin} </>} - {inforSheets.length < numberViews && filter!= "" ? <>{inforSheets.length} </> : <>{countMax} </>} de {countFilesAll} publicações</p> : <p>{countFilesAll} publicações</p>}
-
-      {inforSheets?.length == 0 && <><h6 className={styles.resultTableFooter}>Nenhum Resultado Encontrado</h6></>}
-
-
-
-    {inforSheets?.length > numberViews ? 
-      <Pagination size="sm">
-      <Pagination.First onClick={(e)=> {setNumberPageNow(1); setCountMin(0);setCountMax(numberViews)}}/>
-
-      {inforSheets.length != 0 ? <>{countMin == 0 ? 
-                <Pagination.Prev></Pagination.Prev> : 
-                <Pagination.Prev onClick={(e)=> {setNumberPageNow(numberPageNow-1); setCountMin(countMin - numberViews);setCountMax(countMax - numberViews)}}></Pagination.Prev>}</> : <></>}
-
-      <Pagination.Item active >{numberPageNow}</Pagination.Item>
-
-      {numberPageNow == countPages ? 
-                <Pagination.Next disabled ></Pagination.Next> : 
-                <Pagination.Next onClick={(e)=> {setNumberPageNow(numberPageNow+1); setCountMin(countMax); setCountMax(countMax + numberViews)}}/>} 
-
-      <Pagination.Last onClick={(e)=> {setNumberPageNow(countPages); setCountMin((countPages*numberViews)-10);setCountMax(countPages*numberViews)}}/>
-      </Pagination>
-      : <section className={styles.resultTableFooter}></section> }
-
-      </section>
-        */}
+      <Pagination 
+        currentPage={currentPage} 
+        itemsPerPage={itemsPerPage} 
+        indexOfLastItem={indexOfLastItem} 
+        indexOfFirstItem={indexOfFirstItem}   
+        setNewCurrentPage={setNewCurrentPage}
+        sizeData={inforSheets.length}
+        />
     </section> 
   </>)}
          

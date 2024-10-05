@@ -45,13 +45,9 @@ export default function SwitchTable(props:IpropsComponetShowData) {
 
         </div>
          
-        {/*  {optionSwitchTable == '0' && <TableSheetsPrimary {...props} idTable={'0'}/>}
-        {optionSwitchTable == '1' && <TableSheetsPrimary {...props} idTable={'1'}/>}
-        {optionSwitchTable == '2' && <TableSheetsPrimary {...props} idTable={'2'}/>}  */}
-        {optionSwitchTable == '0' && <>0<TableSheetsPrimary {...props} idTable={'0'}/></>}
-        {optionSwitchTable == '1' && <>1<TableSheetsSecondary {...props} idTable={'1'}/></>}
-        {optionSwitchTable == '2' && <>2<TableSheetsTertiary {...props} idTable={'2'}/></>} 
-    
+        {optionSwitchTable == '0' && <TableSheetsPrimary {...props} idTable={'0'}/>}
+        {optionSwitchTable == '1' && <TableSheetsSecondary {...props} idTable={'1'}/>}
+        {optionSwitchTable == '2' && <TableSheetsTertiary {...props} idTable={'2'}/>}  
   </>
   )}
          

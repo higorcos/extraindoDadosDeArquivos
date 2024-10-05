@@ -1,13 +1,10 @@
 "use client"
 import { useEffect,useState} from "react";
-import { Table } from "react-bootstrap";
-import Pagination from 'react-bootstrap/Pagination';
 import styles from '@/components/table/Table.module.css'
 import {IdataFolha, IdataPeriods,IpropsComponetShowData, IdataFolhasAgrupadas, OptionSwitchTable} from '@/intefaces/ShowSheetsDataInterface'
 import generateExportFile from "@/components/others/downloads/filesDownloads";
 import { useRouter } from 'next/navigation'
 import { nameMonth } from "@/components/others/FormatData";
-
 
 
 export interface IpropsFunctionTable {
@@ -29,6 +26,8 @@ export default function FuncionsTable(props:IpropsFunctionTable) {
   useEffect(()=>{
     setInforSheets(files)
   },[files])
+
+
   const filtrarTabela = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valueFilter = e.target.value.toLowerCase();
      console.log(files)
