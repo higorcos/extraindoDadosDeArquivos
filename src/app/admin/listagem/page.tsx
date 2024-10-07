@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect, CSSProperties } from 'react'
 import "react-toastify/dist/ReactToastify.css";
 
-import { AlertError, AlertSuccess } from '@/ultils/alert';
+import { AlertError, AlertSuccess, AlertWarning } from '@/ultils/alert';
 import api from '@/services/api';
 import { IDataLocalStoragePortal } from "@/intefaces/PortaisDataInterface";
 import { IdataAllPeriods } from "@/intefaces/ShowSheetsDataInterface";
@@ -130,11 +130,29 @@ export default function PageListagemFolhasAdm() {
                      
                     </td>
                     <td className="px-6 py-4">
-                      <svg onClick={()=>{seachForPeriod(i.MES_PERIODO,i.ANO) }}
-                      xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-eye cursor-pointer" viewBox="0 0 16 16">
-                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-                      </svg>
+                      <div className='flex '>
+                        <div>
+                          <svg onClick={()=>{seachForPeriod(i.MES_PERIODO,i.ANO) }}
+                          xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-eye cursor-pointer  mr-4" viewBox="0 0 16 16">
+                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                          </svg>
+                        </div>
+                        <div>
+                          {i.VISUALIZACAO == 1}
+                          <a 
+                          className='!no-underline'
+                          target={i.VISUALIZACAO == 1 ? "_blank": '_self'}
+                          href={i.VISUALIZACAO == 1 ? `/folhas/${showPortal.UUID}/${i.MES_PERIODO}/${i.ANO}/0`: '#'}
+                          onClick={()=>{ i.VISUALIZACAO == 0 && AlertWarning('visualização pública não liberada')}}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="" className=" mr-4" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                          </svg>
+                          </a>
+                        </div>
+
+
+                      </div>
                     </td>
 
                   </tr>
